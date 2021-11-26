@@ -4,12 +4,12 @@
     "slug": "posts-app",
     "version": "1.0.0",
     "orientation": "default",
-    "icon": "./src/assets/images/icon.png",
+    "icon": "./src/assets/images/app-icon.png",
     "splash": {
-      "image": "./src/assets/images/splash.png",
+      "image": "./src/assets/images/app-icon.png",
 
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#87cefa"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -25,7 +25,7 @@
       }
     },
     "web": {
-      "favicon": "./src/assets/images/favicon.png"
+      "favicon": "./src/assets/images/app-icon.png"
     }
   }
 }
