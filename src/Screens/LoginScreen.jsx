@@ -15,6 +15,7 @@ import {
   Dimensions,
 } from 'react-native';
 import { validateEmail } from '../hooks/validateEmail';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
 const initialState = {
   email: '',
@@ -27,6 +28,7 @@ export const LoginScreen = () => {
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setState] = useState(initialState);
   const [heightBG, setHeightBG] = useState(screenHeight);
+  const [hidePassword, setHidePassword] = useState(true);
 
   const { height, width } = useWindowDimensions();
   const passwordRef = useRef();
@@ -83,7 +85,8 @@ export const LoginScreen = () => {
         source={require('../assets/images/Photo_BG.png')}
       >
         <KeyboardAvoidingView
-        // behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
+          // behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
+          behavior={Platform.OS === 'ios' && 'padding'}
         >
           <View
             style={{
@@ -115,19 +118,28 @@ export const LoginScreen = () => {
               }}
               blurOnSubmit={false}
             />
-            <TextInput
-              style={{ ...styles.input, marginTop: 16 }}
-              placeholder={'Password'}
-              secureTextEntry={true}
-              onFocus={() => setIsShowKeyboard(true)}
-              value={state.password}
-              onChangeText={value =>
-                setState(prevState => ({ ...prevState, password: value }))
-              }
-              disableFullscreenUI={true}
-              ref={passwordRef}
-              onSubmitEditing={OnSubmitForm}
-            />
+            <View style={styles.passwordContainer}>
+              <TextInput
+                style={{ ...styles.input, ...styles.inputPassword }}
+                placeholder={'Password'}
+                secureTextEntry={hidePassword ? true : false}
+                onFocus={() => setIsShowKeyboard(true)}
+                value={state.password}
+                onChangeText={value =>
+                  setState(prevState => ({ ...prevState, password: value }))
+                }
+                disableFullscreenUI={true}
+                ref={passwordRef}
+                onSubmitEditing={OnSubmitForm}
+              />
+              <Icon
+                style={styles.iconPassword}
+                name={hidePassword ? 'eye-slash' : 'eye'}
+                size={22}
+                color="#808080"
+                onPress={() => setHidePassword(!hidePassword)}
+              />
+            </View>
             <TouchableOpacity
               activeOpacity={0.7}
               style={styles.btn}
@@ -172,6 +184,7 @@ const styles = StyleSheet.create({
     borderTopEndRadius: 30,
     backgroundColor: 'rgba(225, 225, 225, 0.55)',
   },
+
   input: {
     width: '100%',
     paddingLeft: 16,
@@ -183,15 +196,29 @@ const styles = StyleSheet.create({
     color: '#212121',
     fontSize: 16,
   },
+  passwordContainer: {
+    flexDirection: 'row',
+  },
+  inputPassword: {
+    flex: 1,
+    marginTop: 16,
+    paddingEnd: 54,
+  },
+  iconPassword: {
+    position: 'absolute',
+    top: '45%',
+    right: '5%',
+    zIndex: 1,
+  },
   header: {
     alignItems: 'center',
-    // marginVertical: 32,
   },
   headerTitle: {
     fontSize: 30,
     fontWeight: '700',
     color: '#212121',
   },
+
   btn: {
     borderRadius: 50,
     borderWidth: 1,
