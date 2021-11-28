@@ -153,14 +153,14 @@ export const LoginScreen = () => {
                 marginTop: isShowKeyboard ? 30 : width < height ? '50%' : 30,
               }}
             >
-              <Text style={styles.redirectText}>Don't have an accout?</Text>
+              <Text style={styles.redirectText}>Don't have an account?</Text>
               <TouchableOpacity
                 onPress={() => {
                   console.log('Redirect');
                 }}
                 activeOpacity={0.7}
               >
-                <Text style={styles.redirectLink}>Sign up</Text>
+                <Text style={styles.redirectLink}>Sign up.</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -206,8 +206,9 @@ const styles = StyleSheet.create({
   },
   iconPassword: {
     position: 'absolute',
-    top: '45%',
+    top: '37%',
     right: '5%',
+    padding: 5,
     zIndex: 1,
   },
   header: {
