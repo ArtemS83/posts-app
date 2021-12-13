@@ -16,7 +16,7 @@ import {
   Dimensions,
   Pressable,
 } from 'react-native';
-import { validateEmail } from '../hooks/validateEmail';
+import { validateEmail } from '../../hooks/validateEmail';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 const initialState = {
@@ -27,7 +27,7 @@ const initialState = {
 
 const screenHeight = Dimensions.get('screen').height;
 
-export const RegistrationScreen = () => {
+export const RegistrationScreen = ({ navigation }) => {
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setState] = useState(initialState);
   const [heightBG, setHeightBG] = useState(screenHeight);
@@ -90,7 +90,7 @@ export const RegistrationScreen = () => {
     <TouchableWithoutFeedback onPress={keyboardHide}>
       <ImageBackground
         style={{ ...styles.imageBG, height: heightBG }}
-        source={require('../assets/images/Photo_BG.png')}
+        source={require('../../assets/images/Photo_BG.png')}
       >
         <KeyboardAvoidingView
           // behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
@@ -109,7 +109,7 @@ export const RegistrationScreen = () => {
             >
               <Image
                 style={styles.userImage}
-                source={require('../assets/images/icon-avatar.png')}
+                source={require('../../assets/images/icon-avatar.png')}
                 accessibilityLabel={'user avatar'}
               />
               <Icon
@@ -199,7 +199,7 @@ export const RegistrationScreen = () => {
               <Text style={styles.redirectText}>Already have an account?</Text>
               <TouchableOpacity
                 onPress={() => {
-                  console.log('Redirect');
+                  navigation.navigate('Login');
                 }}
                 activeOpacity={0.7}
               >
